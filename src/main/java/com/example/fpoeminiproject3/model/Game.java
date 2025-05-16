@@ -12,7 +12,7 @@ public class Game {
     private Player currentPlayer;
     private boolean reversed = false;
     private CardColor currentColor;
-    private final List<GameObserver> observers = new ArrayList<>();
+    private final List<Game> observers = new ArrayList<>();
 
     public Game(String playerName) {
         this.deck = new CardDeck();
@@ -42,44 +42,63 @@ public class Game {
         notifyTurnStarted();
     }
 
-    public void addObserver(GameObserver observer) {
+    public void addObserver(Game observer) {
         observers.add(observer);
     }
 
     private void notifyTurnStarted() {
-        for (GameObserver observer : observers) {
+        for (Game observer : observers) {
             observer.onTurnStarted(currentPlayer);
         }
     }
 
+    private void onTurnStarted(Player currentPlayer) {
+    }
+
     private void notifyCardPlayed(Player player, Card card) {
-        for (GameObserver observer : observers) {
+        for (Game observer : observers) {
             observer.onCardPlayed(player, card);
         }
     }
 
+    private void onCardPlayed(Player player, Card card) {
+    }
+
     private void notifyCardDrawn(Player player, Card card) {
-        for (GameObserver observer : observers) {
+        for (Game observer : observers) {
             observer.onCardDrawn(player, card);
         }
     }
 
+    private void onCardDrawn(Player player, Card card) {
+    }
+
     void notifyUnoCalled(Player player) {
-        for (GameObserver observer : observers) {
+        for (Game observer : observers) {
             observer.onUnoCalled(player);
         }
     }
 
+    private void onUnoCalled(Player player) {
+    }
+
     private void notifyGameOver(Player winner) {
-        for (GameObserver observer : observers) {
+        for (Game observer : observers) {
             observer.onGameOver(winner);
         }
     }
 
+    private void onGameOver(Player winner) {
+
+    }
+
     private void notifyColorSelected(Player player, CardColor color) {
-        for (GameObserver observer : observers) {
+        for (Game observer : observers) {
             observer.onColorSelected(player, color);
         }
+    }
+
+    private void onColorSelected(Player player, CardColor color) {
     }
 
     public void playCard(Player player, Card card) throws GameException {
@@ -242,5 +261,13 @@ public class Game {
 
     public CardColor getCurrentColor() {
         return currentColor;
+    }
+
+    public boolean isReversed() {
+        return reversed;
+    }
+
+    public void setReversed(boolean reversed) {
+        this.reversed = reversed;
     }
 }
