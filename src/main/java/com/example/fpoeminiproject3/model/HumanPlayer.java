@@ -5,10 +5,13 @@ public class HumanPlayer extends Player {
     private CardColor selectedCardColor;
     private boolean pressedUnoForOpponent = false;
 
-    public HumanPlayer(String name) {super(name);}
+    public HumanPlayer(String name) {
+        super(name);
+    }
 
     @Override
-    public void playTurn() {}
+    public void playTurn() {
+    }
 
     public void selectCard(Card card) {
         this.selectedCard = card;
@@ -18,7 +21,7 @@ public class HumanPlayer extends Player {
         return selectedCard;
     }
 
-    public void selectedColor(CardColor color) {
+    public void selectColor(CardColor color) {
         this.selectedCardColor = color;
     }
 
