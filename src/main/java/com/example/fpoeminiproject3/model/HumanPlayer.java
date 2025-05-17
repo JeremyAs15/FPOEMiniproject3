@@ -3,7 +3,6 @@ package com.example.fpoeminiproject3.model;
 public class HumanPlayer extends Player {
     private Card selectedCard;
     private CardColor selectedCardColor;
-    private boolean pressedUnoForOpponent = false;
 
     public HumanPlayer(String name) {
         super(name);
@@ -36,6 +35,5 @@ public class HumanPlayer extends Player {
 
     public void resetUnoState() {
         this.calledUno = false;
-        this.pressedUnoForOpponent = false;
     }
 }

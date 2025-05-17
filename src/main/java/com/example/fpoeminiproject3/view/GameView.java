@@ -76,7 +76,7 @@ public class GameView extends BorderPane {
 
         machineHand = new HBox(10);
         machineHand.setAlignment(Pos.CENTER);
-        updatePlayerHand(game.getAIPlayer());
+        updatePlayerHand(game.getMachinePlayer());
 
         HBox cardsPanel = new HBox(30);
         cardsPanel.setAlignment(Pos.CENTER);
@@ -223,8 +223,8 @@ public class GameView extends BorderPane {
             unoButtonActive = false;
             if (game.getHumanPlayer().getDeckSize() == 1) {
                 controller.handleUnoCall();
-            } else if (game.getAIPlayer().getDeckSize() == 1) {
-                game.checkUnoPenalty(game.getAIPlayer());
+            } else if (game.getMachinePlayer().getDeckSize() == 1) {
+                game.checkUnoPenalty(game.getMachinePlayer());
                 hideUnoButton();
             }
         }

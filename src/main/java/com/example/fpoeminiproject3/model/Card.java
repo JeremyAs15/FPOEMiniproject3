@@ -14,21 +14,21 @@ public class Card {
     public String ImagePath() {
         if (color == CardColor.WILD) {
             if (type == CardType.WILD_DRAW_FOUR){
-                return "com/example/fpoeminiproject3/images/4_wild_draw.png";
+                return "/com/example/fpoeminiproject3/images/4_wild_draw.png";
             }
-            return "com/example/fpoeminiproject3/images/wild.png";
+            return "/com/example/fpoeminiproject3/images/wild.png";
         }
         switch (type) {
             case SKIP:
-                return String.format("com/example/fpoeminiproject3/images/skip_%s.png", color.name().toLowerCase());
+                return String.format("/com/example/fpoeminiproject3/images/skip_%s.png", color.name().toLowerCase());
             case REVERSE:
-                return String.format("com/example/fpoeminiproject3/images/reverse_%s.png", color.name().toLowerCase());
+                return String.format("/com/example/fpoeminiproject3/images/reverse_%s.png", color.name().toLowerCase());
             case DRAW_TWO:
-                return String.format("com/example/fpoeminiproject3/images/2_wild_draw_%s.png", color.name().toLowerCase());
+                return String.format("/com/example/fpoeminiproject3/images/2_wild_draw_%s.png", color.name().toLowerCase());
             default:
                 break;
         }
-        return String.format("com/example/fpoeminiproject3/images/%d_%s.png", type.ordinal(), color.name().toLowerCase());
+        return String.format("/com/example/fpoeminiproject3/images/%d_%s.png", type.ordinal(), color.name().toLowerCase());
     }
 
     public CardColor getColor() {

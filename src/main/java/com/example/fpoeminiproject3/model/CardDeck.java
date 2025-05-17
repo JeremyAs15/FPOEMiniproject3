@@ -21,7 +21,7 @@ public class CardDeck {
             if (color == CardColor.WILD) continue;
 
             drawPile.add(new Card(color, CardType.ZERO));
-            for(int i = 1; i <= 9; i++) {
+            for (int i = 1; i <= 9; i++) {
                 CardType type = CardType.values()[i];
                 drawPile.add(new Card(color, type));
             }

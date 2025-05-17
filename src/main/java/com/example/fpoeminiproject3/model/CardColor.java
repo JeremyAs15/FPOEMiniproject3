@@ -1,7 +1,7 @@
 package com.example.fpoeminiproject3.model;
 
 public enum CardColor {
-    BLUE, GREEN, RED, YELLOW, WILD;
+    RED, BLUE, GREEN, YELLOW, WILD;
 
     @Override
     public String toString() {

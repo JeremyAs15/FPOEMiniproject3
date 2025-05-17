@@ -1,7 +1,8 @@
 package com.example.fpoeminiproject3.model;
 
 public enum CardType {
-    ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, WILD, DRAW_TWO, WILD_DRAW_FOUR, REVERSE, SKIP;
+    ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE,
+    SKIP, REVERSE, DRAW_TWO, WILD, WILD_DRAW_FOUR;
 
     @Override
     public String toString() {
