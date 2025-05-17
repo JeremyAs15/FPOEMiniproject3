@@ -74,4 +74,12 @@ public class CardDeck {
         shuffle();
         discardPile.push(topCard);
     }
+
+    public int getDrawPileSize() {
+        return drawPile.size();
+    }
+
+    public int getDiscardPileSize() {
+        return discardPile.size();
+    }
 }
