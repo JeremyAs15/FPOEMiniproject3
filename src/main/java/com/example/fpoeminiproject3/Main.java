@@ -25,7 +25,6 @@ public class Main extends Application {
             welcomeLabel.setFont(new Font(24));
 
             TextField nameField = new TextField();
-            nameField.setPromptText("Coloca tu nombre");
             nameField.setMaxWidth(200);
 
             Button startBtn = new Button("Comenzar Juego");
