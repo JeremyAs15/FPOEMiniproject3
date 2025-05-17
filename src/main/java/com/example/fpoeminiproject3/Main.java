@@ -1,5 +1,6 @@
 package com.example.fpoeminiproject3;
 
+import com.example.fpoeminiproject3.controller.GameController;
 import com.example.fpoeminiproject3.model.Game;
 import com.example.fpoeminiproject3.view.GameView;
 import javafx.application.Application;
@@ -54,7 +55,7 @@ public class Main extends Application {
             primaryStage.show();
             nameField.requestFocus();
         } catch (Exception e) {
-            showErrorAlert();
+            showErrorAlert("Error al iniciar el juego");
         }
     }
 
@@ -74,19 +75,23 @@ public class Main extends Application {
         try {
             Game game = new Game(playerName);
             GameView gameView = new GameView(null, game);
+            GameController controller = new GameController(game, gameView);
+            gameView.controller = controller;
+
             Scene gameScene = new Scene(gameView, 800, 600);
             primaryStage.setScene(gameScene);
             primaryStage.setTitle("UNO - " + playerName);
+            controller.initialize();
         } catch (Exception e) {
-            showErrorAlert();
+            showErrorAlert("Error al iniciar el juego");
         }
     }
 
-    private void showErrorAlert() {
+    private void showErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText("Error al iniciar el juego");
+        alert.setContentText(message);
         alert.showAndWait();
     }
 
