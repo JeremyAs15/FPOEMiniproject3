@@ -5,7 +5,7 @@
 }
 
 .message-label {
-    -fx-font-size: 16px;
+    -fx-font-size: 18px;
     -fx-text-fill: #FFEB3B; /* Amarillo para mensajes */
 }
 

@@ -19,6 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * The main game view for the game, implementing the user interface.
+ */
 public class GameView extends BorderPane {
     public GameController controller;
     private final Game game;
@@ -34,6 +37,11 @@ public class GameView extends BorderPane {
     private Button unoButton;
     private final Map<Card, ImageView> cardImageViews = new HashMap<>();
 
+    /**
+     * Constructs a new GameView with the specified controller and game model.
+     * @param controller the game controller
+     * @param game the game model
+     */
     public GameView(GameController controller, Game game) {
         this.controller = controller;
         this.game = game;
@@ -41,6 +49,9 @@ public class GameView extends BorderPane {
         initializeUI();
     }
 
+    /**
+     * Initializes the main UI components and layout.
+     */
     private void initializeUI() {
         setPadding(new Insets(20));
         setBackground(new Background(new BackgroundFill(Color.DARKSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -50,6 +61,9 @@ public class GameView extends BorderPane {
         createBottomPanel();
     }
 
+    /**
+     * Creates the top panel containing current player and message labels.
+     */
     private void createTopPanel() {
         VBox topPanel = new VBox(10);
         topPanel.setAlignment(Pos.CENTER);
@@ -67,6 +81,9 @@ public class GameView extends BorderPane {
         setTop(topPanel);
     }
 
+    /**
+     * Creates the center panel containing the machine's hand, deck/discard piles, and player's hand.
+     */
     private void createCenterPanel() {
         GridPane centerPanel = new GridPane();
         centerPanel.setAlignment(Pos.CENTER);
@@ -104,15 +121,18 @@ public class GameView extends BorderPane {
         setCenter(centerPanel);
     }
 
+    /**
+     * Creates the bottom panel containing game controls.
+     */
     private void createBottomPanel() {
         HBox bottomPanel = new HBox(20);
         bottomPanel.setAlignment(Pos.CENTER);
         bottomPanel.setPadding(new Insets(20, 0, 0, 0));
 
-        Button exitButton = new Button("Salir");
+        Button exitButton = new Button("Exit");
         exitButton.setFont(new Font(16));
         exitButton.setStyle("-fx-background-color: #F44336; -fx-text-fill: white;");
-        exitButton.setOnAction(e -> Platform.exit()); // Solución directa alternativa
+        exitButton.setOnAction(e -> Platform.exit());
 
         unoButton = new Button("UNO!");
         unoButton.setFont(new Font(16));
@@ -124,6 +144,10 @@ public class GameView extends BorderPane {
         setBottom(bottomPanel);
     }
 
+    /**
+     * Updates the visual representation of a player's hand.
+     * @param player the player whose hand to update
+     */
     public void updatePlayerHand(Player player) {
         Platform.runLater(() -> {
             if (player == game.getHumanPlayer()) {
@@ -147,6 +171,11 @@ public class GameView extends BorderPane {
         });
     }
 
+    /**
+     * Creates a clickable card view for the specified card.
+     * @param card the card to create a view for
+     * @return the created ImageView
+     */
     private ImageView createCardView(Card card) {
         ImageView cardView = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream(card.getImageCardPath()))));
         cardView.setFitHeight(120);
@@ -156,6 +185,10 @@ public class GameView extends BorderPane {
         return cardView;
     }
 
+    /**
+     * Updates the discard pile view with the specified card.
+     * @param card the card to display on the discard pile
+     */
     public void updateDiscardPile(Card card) {
         Platform.runLater(() -> {
             if (card != null) {
@@ -165,12 +198,21 @@ public class GameView extends BorderPane {
         });
     }
 
+    /**
+     * Updates the current player label.
+     * @param player the player whose turn it is
+     */
     public void updateCurrentPlayer(Player player) {
         Platform.runLater(() -> {
-            currentPlayerLabel.setText("Turno de: " + player.getName());
+            currentPlayerLabel.setText("Turn of: " + player.getName());
         });
     }
 
+    /**
+     * Shows a temporary message that disappears after the specified time.
+     * @param message the message to display
+     * @param seconds how long to display the message
+     */
     public void showTemporaryMessage(String message, int seconds) {
         Platform.runLater(() -> {
             messageLabel.setText(message);
@@ -181,6 +223,11 @@ public class GameView extends BorderPane {
         });
     }
 
+    /**
+     * Shows the UNO button with a timeout.
+     * @param player the player who needs to call UNO
+     * @param timeoutSeconds how long the button should be active
+     */
     public void showUnoButtonWithTimeout(Player player, int timeoutSeconds) {
         Platform.runLater(() -> {
             unoButtonActive = true;
@@ -189,7 +236,7 @@ public class GameView extends BorderPane {
                 unoButton.setText("UNO!");
                 unoButton.setStyle("-fx-background-color: #FF5252; -fx-text-fill: white; -fx-font-weight: bold;");
             } else {
-                unoButton.setText("¡Penalizar Maquina!");
+                unoButton.setText("Penalize Machine!");
                 unoButton.setStyle("-fx-background-color: #FF9800; -fx-text-fill: white; -fx-font-weight: bold;");
             }
 
@@ -210,6 +257,10 @@ public class GameView extends BorderPane {
         });
     }
 
+    /**
+     * Handles the UNO button timeout.
+     * @param player the player who failed to call UNO in time
+     */
     private void handleUnoTimeout(Player player) {
         unoButtonActive = false;
         unoButton.setVisible(false);
@@ -218,6 +269,9 @@ public class GameView extends BorderPane {
         }
     }
 
+    /**
+     * Handles clicks on the UNO button.
+     */
     public void handleUnoButtonClick() {
         if (unoButtonActive) {
             unoButtonActive = false;
@@ -230,6 +284,9 @@ public class GameView extends BorderPane {
         }
     }
 
+    /**
+     * Hides the UNO button.
+     */
     public void hideUnoButton() {
         Platform.runLater(() -> {
             unoButtonActive = false;
@@ -237,25 +294,28 @@ public class GameView extends BorderPane {
         });
     }
 
+    /**
+     * Shows a color selection dialog for wild cards.
+     */
     public void showColorSelectionDialog() {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Seleccionar Color");
-            alert.setHeaderText("Elige un color para la carta comodín");
+            alert.setTitle("Choose a color");
+            alert.setHeaderText("Choose a color for the wildcard");
 
-            ButtonType blueButton = new ButtonType("Azul");
-            ButtonType redButton = new ButtonType("Rojo");
-            ButtonType greenButton = new ButtonType("Verde");
-            ButtonType yellowButton = new ButtonType("Amarillo");
+            ButtonType blueButton = new ButtonType("Blue");
+            ButtonType redButton = new ButtonType("Red");
+            ButtonType greenButton = new ButtonType("Green");
+            ButtonType yellowButton = new ButtonType("Yellow");
 
             alert.getButtonTypes().setAll(blueButton, redButton, greenButton, yellowButton);
 
             alert.showAndWait().ifPresent(buttonType -> {
                 CardColor selectedColor = switch (buttonType.getText()) {
-                    case "Azul" -> CardColor.BLUE;
-                    case "Rojo" -> CardColor.RED;
-                    case "Verde" -> CardColor.GREEN;
-                    case "Amarillo" -> CardColor.YELLOW;
+                    case "Blue" -> CardColor.BLUE;
+                    case "Red" -> CardColor.RED;
+                    case "Green" -> CardColor.GREEN;
+                    case "Yellow" -> CardColor.YELLOW;
                     default -> null;
                 };
 
@@ -267,16 +327,19 @@ public class GameView extends BorderPane {
         });
     }
 
+    /**
+     * Shows the game over dialog when a player wins.
+     * @param winner the winning player
+     */
     public void showGameOver(Player winner) {
         Platform.runLater(() -> {
             updateDiscardPile(game.getTopDiscardCard());
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Juego Terminado");
+            alert.setTitle("Game over");
             alert.setHeaderText(null);
-            alert.setContentText(winner.getName() + " ha ganado el juego!\nGracias por jugar.");
+            alert.setContentText(winner.getName() + " has won the game!\nThank you for playing.");
             alert.showAndWait();
         });
     }
 }
-

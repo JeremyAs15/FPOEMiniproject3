@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Represents a machine opponent in the game.
+ */
 public class MachinePlayer extends Player {
     private final Random random = new Random();
 
@@ -12,6 +15,9 @@ public class MachinePlayer extends Player {
         super(name);
     }
 
+    /**
+     * Executes the machine player's turn.
+     */
     @Override
     public void playTurn() {
         try {
@@ -54,6 +60,10 @@ public class MachinePlayer extends Player {
         }
     }
 
+    /**
+     * Chooses a color when playing a WILD card.
+     * @return the selected CardColor (never WILD)
+     */
     public CardColor chooseColor() {
         Map<CardColor, Integer> colorCount = new HashMap<>();
 
@@ -73,6 +83,10 @@ public class MachinePlayer extends Player {
                 .get()
                 .getKey();
     }
+
+    /**
+     * Marks that the machine player has called UNO and notifies the game.
+     */
     @Override
     public void callUno() {
         this.calledUno = true;
