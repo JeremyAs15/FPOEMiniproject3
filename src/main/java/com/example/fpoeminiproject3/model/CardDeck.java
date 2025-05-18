@@ -14,7 +14,7 @@ public class CardDeck {
     private final Stack<Card> discardPile;
 
     /**
-     * Constructs a new CardDeck with initialized and shuffled cards and creates a standard UNO deck with 64 cards including:
+     * Constructs a new CardDeck with initialized and shuffled cards and creates a standard UNO deck with 64 cards.
      */
     public CardDeck() {
         drawPile = new Stack<>();
@@ -50,7 +50,7 @@ public class CardDeck {
             drawPile.add(new Card(CardColor.WILD, CardType.WILD_DRAW_FOUR));
         }
     }
-    
+
 
     /**
      * Shuffles the draw pile to randomize card order.
