@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.util.HashMap;
@@ -310,6 +311,11 @@ public class GameView extends BorderPane {
 
             alert.getButtonTypes().setAll(blueButton, redButton, greenButton, yellowButton);
 
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+            stage.setOnCloseRequest(event -> {
+                stage.close();
+            });
+
             alert.showAndWait().ifPresent(buttonType -> {
                 CardColor selectedColor = switch (buttonType.getText()) {
                     case "Blue" -> CardColor.BLUE;
@@ -320,7 +326,7 @@ public class GameView extends BorderPane {
                 };
 
                 if (selectedColor != null) {
-                    ((HumanPlayer)game.getHumanPlayer()).selectColor(selectedColor);
+                    game.getHumanPlayer().selectColor(selectedColor);
                     controller.handleColorSelection(selectedColor);
                 }
             });

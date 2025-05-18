@@ -14,7 +14,7 @@ public class CardDeck {
     private final Stack<Card> discardPile;
 
     /**
-     * Constructs a new CardDeck with initialized and shuffled cards and creates a standard UNO deck with 108 cards including:
+     * Constructs a new CardDeck with initialized and shuffled cards and creates a standard UNO deck with 64 cards including:
      */
     public CardDeck() {
         drawPile = new Stack<>();
@@ -37,14 +37,11 @@ public class CardDeck {
             for (int i = 1; i <= 9; i++) {
                 CardType type = CardType.values()[i];
                 drawPile.add(new Card(color, type));
-                drawPile.add(new Card(color, type)); // Second copy
             }
 
             drawPile.add(new Card(color, CardType.DRAW_TWO));
             drawPile.add(new Card(color, CardType.DRAW_TWO));
             drawPile.add(new Card(color, CardType.SKIP));
-            drawPile.add(new Card(color, CardType.SKIP));
-            drawPile.add(new Card(color, CardType.REVERSE));
             drawPile.add(new Card(color, CardType.REVERSE));
         }
 
@@ -53,6 +50,7 @@ public class CardDeck {
             drawPile.add(new Card(CardColor.WILD, CardType.WILD_DRAW_FOUR));
         }
     }
+    
 
     /**
      * Shuffles the draw pile to randomize card order.
